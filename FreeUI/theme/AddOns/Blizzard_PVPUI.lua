@@ -92,21 +92,23 @@ C.themes["Blizzard_PVPUI"] = function()
 		end
 	end
 
-	hooksecurefunc("HonorFrameBonusFrame_Update", function()
-		local hasData, canQueue, bgName, battleGroundID, hasWon, winHonorAmount, winConquestAmount = GetHolidayBGInfo()
-		local rewardIndex = 0
-		if winConquestAmount and winConquestAmount > 0 then
-			rewardIndex = rewardIndex + 1
-			local frame = HonorFrame.BonusFrame["BattlegroundReward"..rewardIndex]
-			frame.Icon:SetTexture("Interface\\Icons\\PVPCurrency-Conquest-"..englishFaction)
-		end
-		if winHonorAmount and winHonorAmount > 0 then
-			rewardIndex = rewardIndex + 1
-			local frame = HonorFrame.BonusFrame["BattlegroundReward"..rewardIndex]
-			frame.Icon:SetTexture("Interface\\Icons\\PVPCurrency-Honor-"..englishFaction)
-		end
-	end)
-
+	if GetHolidayBGInfo then
+		hooksecurefunc("HonorFrameBonusFrame_Update", function()
+			local hasData, canQueue, bgName, battleGroundID, hasWon, winHonorAmount, winConquestAmount = GetHolidayBGInfo()
+			local rewardIndex = 0
+			if winConquestAmount and winConquestAmount > 0 then
+				rewardIndex = rewardIndex + 1
+				local frame = HonorFrame.BonusFrame["BattlegroundReward"..rewardIndex]
+				frame.Icon:SetTexture("Interface\\Icons\\PVPCurrency-Conquest-"..englishFaction)
+			end
+			if winHonorAmount and winHonorAmount > 0 then
+				rewardIndex = rewardIndex + 1
+				local frame = HonorFrame.BonusFrame["BattlegroundReward"..rewardIndex]
+				frame.Icon:SetTexture("Interface\\Icons\\PVPCurrency-Honor-"..englishFaction)
+			end
+		end)
+	end
+	
 	IncludedBattlegroundsDropDown:SetPoint("TOPRIGHT", BonusFrame.DiceButton, 40, 26)
 
 	-- Role buttons
