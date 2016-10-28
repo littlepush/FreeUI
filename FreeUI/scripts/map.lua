@@ -32,6 +32,8 @@ WorldMapDetailFrame:HookScript("OnUpdate", function(self, elapsed)
 	last = last + elapsed
 	if last >= freq then
 		local x, y = GetPlayerMapPosition("player")
+		if nil == x then x = 0 end
+		if nil == y then y = 0 end
 		x = math.floor(100 * x)
 		y = math.floor(100 * y)
 		if x ~= 0 and y ~= 0 then
